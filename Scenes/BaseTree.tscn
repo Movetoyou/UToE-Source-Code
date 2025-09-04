@@ -1,0 +1,547 @@
+[gd_scene load_steps=9 format=3 uid="uid://c15jqghuel50j"]
+
+[ext_resource type="Script" uid="uid://bq07rkct7ya2f" path="res://Scripts/Income.gd" id="1_jendt"]
+[ext_resource type="Texture2D" uid="uid://dvyifn5k5csl2" path="res://Sprites/Button.png" id="2_8m4aq"]
+[ext_resource type="Script" uid="uid://blx7d5qjx5vne" path="res://Scripts/Camera.gd" id="2_ypx6x"]
+[ext_resource type="Script" uid="uid://c3tx170bglulo" path="res://Scripts/Upgrade.gd" id="3_v3wsh"]
+[ext_resource type="Texture2D" uid="uid://b0dcmu0eifhva" path="res://Sprites/HLine.png" id="4_sltar"]
+[ext_resource type="Texture2D" uid="uid://jp7ulnh61aep" path="res://Sprites/VLine.png" id="5_bgwxu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jendt"]
+bg_color = Color(0, 0, 0, 0.498039)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sltar"]
+bg_color = Color(0, 0, 0, 0.498039)
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_jendt")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="InfoDataLabel" type="Label" parent="CanvasLayer"]
+offset_right = 200.0
+offset_bottom = 184.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_jendt")
+text = "Seed: %s
+	Base Income: %s
+	Boosted Income: %s
+	Boost Multiplier: %.3f
+	Income / sec: %s
+	Income Timer: %.2f"
+horizontal_alignment = 1
+
+[node name="Back" type="Button" parent="CanvasLayer/InfoDataLabel"]
+layout_mode = 0
+offset_top = 153.0
+offset_right = 90.0
+offset_bottom = 184.0
+text = "<"
+
+[node name="Next" type="Button" parent="CanvasLayer/InfoDataLabel"]
+layout_mode = 0
+offset_left = 110.0
+offset_top = 153.0
+offset_right = 200.0
+offset_bottom = 184.0
+text = ">"
+
+[node name="TimerLabel" type="Label" parent="CanvasLayer"]
+offset_left = 975.0
+offset_right = 1152.0
+offset_bottom = 49.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_sltar")
+text = "Time after purchased:
+0.00 s"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BackToTreeSelect" type="Button" parent="CanvasLayer"]
+offset_left = 201.0
+offset_top = 1.0
+offset_right = 247.0
+offset_bottom = 37.0
+text = "<--"
+
+[node name="UpgradeTree" type="Node2D" parent="."]
+
+[node name="Camera" type="CharacterBody2D" parent="."]
+script = ExtResource("2_ypx6x")
+
+[node name="Camera2D" type="Camera2D" parent="Camera"]
+anchor_mode = 0
+
+[node name="Seed" type="Node2D" parent="."]
+
+[node name="Seed-00" type="Sprite2D" parent="Seed"]
+position = Vector2(250, 450)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_8m4aq")
+script = ExtResource("3_v3wsh")
+ButtonType = "Seed"
+Name = "Start growing the tree!"
+Number = "Seed - 00"
+Text = "Gain 1 Seed/sec"
+Value = 1.0
+UnlockBtn = ["Seed - 01", "Seed - 00"]
+
+[node name="Seed-01" type="Sprite2D" parent="Seed"]
+position = Vector2(525, 450)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_8m4aq")
+script = ExtResource("3_v3wsh")
+ButtonType = "Seed"
+Name = "Your First Upgrade"
+Number = "Seed - 01"
+Text = "Gain Double Seed Income"
+IsExponent = true
+Value = 2.0
+Cost = 5.0
+UnlockBtn = ["Seed - 01.1", "Seed - 02"]
+
+[node name="HLine" type="Sprite2D" parent="Seed/Seed-01"]
+z_index = -1
+position = Vector2(-276, 0)
+scale = Vector2(2, 2)
+texture = ExtResource("4_sltar")
+
+[node name="Seed-01_1" type="Sprite2D" parent="Seed"]
+position = Vector2(525, 305)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_8m4aq")
+script = ExtResource("3_v3wsh")
+ButtonType = "Seed"
+Name = "First Boost Upgrade"
+Number = "Seed - 01.1"
+Text = "Boost Seed Income overtime
+by 5% to Itself"
+Cost = 50.0
+UnlockBtn = ["Seed - 01.2", "Seed - 00"]
+BoostToggle = true
+BoostSource = "Seed"
+BoostTarget = "Seed"
+BoostValue = 0.05
+
+[node name="VLine" type="Sprite2D" parent="Seed/Seed-01_1"]
+z_index = -1
+position = Vector2(0, 144)
+scale = Vector2(2, 2)
+texture = ExtResource("5_bgwxu")
+
+[node name="Seed-01_2" type="Sprite2D" parent="Seed"]
+position = Vector2(800, 305)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_8m4aq")
+script = ExtResource("3_v3wsh")
+ButtonType = "Seed"
+Name = "End of Path"
+Number = "Seed - 01.2"
+Text = "Gain Double Seed Income"
+IsExponent = true
+Value = 2.0
+Cost = 100.0
+
+[node name="HLine" type="Sprite2D" parent="Seed/Seed-01_2"]
+z_index = -1
+position = Vector2(-276, 0)
+scale = Vector2(2, 2)
+texture = ExtResource("4_sltar")
+
+[node name="Seed-02" type="Sprite2D" parent="Seed"]
+position = Vector2(800, 450)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_8m4aq")
+script = ExtResource("3_v3wsh")
+ButtonType = "Seed"
+Name = "First Multi Upgrade"
+Number = "Seed - 02"
+Text = "Gain 25% Seed Income"
+IsExponent = true
+Value = 1.25
+Cost = 10.0
+Exponent = 1.15
+MaxLevel = 10
+UnlockBtn = ["Seed - 03", "Seed - 00"]
+
+[node name="HLine" type="Sprite2D" parent="Seed/Seed-02"]
+z_index = -1
+position = Vector2(-276, 0)
+scale = Vector2(2, 2)
+texture = ExtResource("4_sltar")
+
+[node name="Seed-03" type="Sprite2D" parent="Seed"]
+position = Vector2(1075, 450)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_8m4aq")
+script = ExtResource("3_v3wsh")
+ButtonType = "Seed"
+Name = "First Timer Reduction Upgrade"
+Number = "Seed - 03"
+Text = "Decrease Seed Income 
+Timer by 0.10 seconds"
+Cost = 200.0
+UnlockBtn = ["Seed - 03.1", "Seed - 04"]
+TimerToggle = true
+TimerValue = 0.1
+
+[node name="HLine" type="Sprite2D" parent="Seed/Seed-03"]
+z_index = -1
+position = Vector2(-276, 0)
+scale = Vector2(2, 2)
+texture = ExtResource("4_sltar")
+
+[node name="Seed-03_1" type="Sprite2D" parent="Seed"]
+position = Vector2(1075, 305)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_8m4aq")
+script = ExtResource("3_v3wsh")
+ButtonType = "Seed"
+Name = "Some More Seed"
+Number = "Seed - 03.1"
+Text = "+12.75 Base Seed Income"
+Value = 12.75
+Cost = 250.0
+UnlockBtn = ["Seed - 03.2", "Seed - 00"]
+
+[node name="VLine" type="Sprite2D" parent="Seed/Seed-03_1"]
+z_index = -1
+position = Vector2(0, 146)
+scale = Vector2(2, 2)
+texture = ExtResource("5_bgwxu")
+
+[node name="Seed-03_2" type="Sprite2D" parent="Seed"]
+position = Vector2(1350, 305)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_8m4aq")
+script = ExtResource("3_v3wsh")
+ButtonType = "Seed"
+Name = "Find Something to Reduce"
+Number = "Seed - 03.2"
+Text = "Decrease Seed Income
+Timer by 0.01 seconds"
+Cost = 1000.0
+Exponent = 1.21
+MaxLevel = 15
+TimerToggle = true
+TimerValue = 0.01
+
+[node name="HLine" type="Sprite2D" parent="Seed/Seed-03_2"]
+z_index = -1
+position = Vector2(-274, 0)
+scale = Vector2(2, 2)
+texture = ExtResource("4_sltar")
+
+[node name="Seed-04" type="Sprite2D" parent="Seed"]
+position = Vector2(1350, 450)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_8m4aq")
+script = ExtResource("3_v3wsh")
+ButtonType = "Seed"
+Name = "Upgrading Boost?"
+Number = "Seed - 04"
+Text = "+2.5% Seed Boost to Itself"
+Cost = 300.0
+UnlockBtn = ["Seed - 05", "Seed - 00"]
+BoostToggle = true
+BoostSource = "Seed"
+BoostTarget = "Seed"
+BoostValue = 0.025
+
+[node name="HLine" type="Sprite2D" parent="Seed/Seed-04"]
+z_index = -1
+position = Vector2(-276, 0)
+scale = Vector2(2, 2)
+texture = ExtResource("4_sltar")
+
+[node name="Seed-05" type="Sprite2D" parent="Seed"]
+position = Vector2(1625, 450)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_8m4aq")
+script = ExtResource("3_v3wsh")
+ButtonType = "Seed"
+Name = "First Cost Reduction Upgrade"
+Number = "Seed - 05"
+Text = "Reduce Base Cost for button
+\"Seed - 03.2\" by 90%"
+Cost = 350.0
+UnlockBtn = ["Seed - 06", "Seed - 00"]
+ReduceToggle = true
+ReduceTarget = "Seed - 03.2"
+ReduceValue = 100
+
+[node name="HLine" type="Sprite2D" parent="Seed/Seed-05"]
+z_index = -1
+position = Vector2(-274, 0)
+scale = Vector2(2, 2)
+texture = ExtResource("4_sltar")
+
+[node name="Seed-06" type="Sprite2D" parent="Seed"]
+position = Vector2(1625, 595)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_8m4aq")
+script = ExtResource("3_v3wsh")
+ButtonType = "Seed"
+Name = "More Seed"
+Number = "Seed - 06"
+Text = "Double Seed Income"
+IsExponent = true
+Value = 2.0
+Cost = 425.0
+UnlockBtn = ["Seed - 07", "Seed - 00"]
+
+[node name="VLine" type="Sprite2D" parent="Seed/Seed-06"]
+z_index = -1
+position = Vector2(0, -144)
+scale = Vector2(2, 2)
+texture = ExtResource("5_bgwxu")
+
+[node name="Seed-07" type="Sprite2D" parent="Seed"]
+position = Vector2(1350, 595)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_8m4aq")
+script = ExtResource("3_v3wsh")
+ButtonType = "Seed"
+Name = "First Bloom Upgrade"
+Number = "Seed - 07"
+Text = "Gain 20% Seed Income
+(50% per 5 level)"
+IsExponent = true
+Value = 1.2
+Cost = 1000.0
+Exponent = 1.125
+MaxLevel = 10
+UnlockBtn = ["Seed - 08", "Seed - 00"]
+BloomToggle = true
+BloomInterval = 5
+BloomValue = 1.5
+
+[node name="HLine" type="Sprite2D" parent="Seed/Seed-07"]
+z_index = -1
+position = Vector2(274, 0)
+scale = Vector2(2, 2)
+texture = ExtResource("4_sltar")
+
+[node name="Seed-08" type="Sprite2D" parent="Seed"]
+position = Vector2(1350, 740)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_8m4aq")
+script = ExtResource("3_v3wsh")
+ButtonType = "Seed"
+Name = "Even More Seed"
+Number = "Seed - 08"
+Text = "Gain 50% Seed Income"
+IsExponent = true
+Value = 1.5
+Cost = 12500.0
+UnlockBtn = ["Seed - 09", "Seed - 00"]
+
+[node name="VLine" type="Sprite2D" parent="Seed/Seed-08"]
+z_index = -1
+position = Vector2(0, -146)
+scale = Vector2(2, 2)
+texture = ExtResource("5_bgwxu")
+
+[node name="Seed-09" type="Sprite2D" parent="Seed"]
+position = Vector2(1075, 740)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_8m4aq")
+script = ExtResource("3_v3wsh")
+ButtonType = "Seed"
+Name = "Timer now halfed!"
+Number = "Seed - 09"
+Text = "Decrease Seed Income
+Timer by 0.25 seconds"
+Cost = 25000.0
+UnlockBtn = ["Seed - 10A", "Seed - 11"]
+TimerToggle = true
+TimerValue = 0.25
+
+[node name="HLine" type="Sprite2D" parent="Seed/Seed-09"]
+z_index = -1
+position = Vector2(274, 0)
+scale = Vector2(2, 2)
+texture = ExtResource("4_sltar")
+
+[node name="Seed-10A" type="Sprite2D" parent="Seed"]
+position = Vector2(1075, 595)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_8m4aq")
+script = ExtResource("3_v3wsh")
+ButtonType = "Seed"
+Name = "First Synergy Upgrade"
+Number = "Seed - 10A"
+Text = "(Purchase both buttons for effect)"
+Cost = 35000.0
+SynergyToggle = true
+SynergyTargets = ["Seed - 10A", "Seed - 10B"]
+SynergyReward = [{
+"Source": "",
+"Target": "Seed",
+"Type": "Multi",
+"Value": 2.0,
+"ValueType": "Exponent"
+}, {
+"Source": "Seed",
+"Target": "Seed",
+"Type": "Boost",
+"Value": 0.05,
+"ValueType": ""
+}, {
+"Source": "",
+"Target": "Seed - 12",
+"Type": "Reduce",
+"Value": 100000.0,
+"ValueType": ""
+}, {
+"Source": "",
+"Target": "",
+"Type": "Delta",
+"Value": 1.0,
+"ValueType": ""
+}]
+SynergyRewardText = "Gain Double Seed Income, +2.5% Seed Boost to Itself,
+Set Base Cost for button \"Seed - 12\" to 100K Seed"
+
+[node name="VLine" type="Sprite2D" parent="Seed/Seed-10A"]
+z_index = -1
+position = Vector2(0, 146)
+scale = Vector2(2, 2)
+texture = ExtResource("5_bgwxu")
+
+[node name="Seed-10B" type="Sprite2D" parent="Seed"]
+position = Vector2(800, 595)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_8m4aq")
+script = ExtResource("3_v3wsh")
+ButtonType = "Seed"
+Name = "First Synergy Upgrade"
+Number = "Seed - 10B"
+Text = "(Purchase both buttons for effect)"
+Cost = 55000.0
+SynergyToggle = true
+SynergyTargets = ["Seed - 10A", "Seed - 10B"]
+SynergyReward = [{
+"Source": "",
+"Target": "Seed",
+"Type": "Multi",
+"Value": 2.0,
+"ValueType": "Exponent"
+}, {
+"Source": "Seed",
+"Target": "Seed",
+"Type": "Boost",
+"Value": 0.05,
+"ValueType": ""
+}, {
+"Source": "",
+"Target": "Seed - 12",
+"Type": "Reduce",
+"Value": 100000.0,
+"ValueType": ""
+}, {
+"Source": "",
+"Target": "",
+"Type": "Delta",
+"Value": 1.0,
+"ValueType": ""
+}]
+SynergyRewardText = "Gain Double Seed Income, +2.5% Seed Boost to Itself,
+Set Base Cost for button \"Seed - 12\" to 100K Seed"
+
+[node name="VLine" type="Sprite2D" parent="Seed/Seed-10B"]
+z_index = -1
+position = Vector2(0, 146)
+scale = Vector2(2, 2)
+texture = ExtResource("5_bgwxu")
+
+[node name="Seed-11" type="Sprite2D" parent="Seed"]
+position = Vector2(800, 740)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_8m4aq")
+script = ExtResource("3_v3wsh")
+ButtonType = "Seed"
+Name = "More Boost"
+Number = "Seed - 11"
+Text = "+2.5% Seed Boost to Itself"
+Cost = 45000.0
+UnlockBtn = ["Seed - 12", "Seed - 10B"]
+BoostToggle = true
+BoostSource = "Seed"
+BoostTarget = "Seed"
+BoostValue = 0.025
+
+[node name="HLine" type="Sprite2D" parent="Seed/Seed-11"]
+z_index = -1
+position = Vector2(274, 0)
+scale = Vector2(2, 2)
+texture = ExtResource("4_sltar")
+
+[node name="Seed-12" type="Sprite2D" parent="Seed"]
+position = Vector2(525, 740)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_8m4aq")
+script = ExtResource("3_v3wsh")
+ButtonType = "Seed"
+Name = "Overpriced Button"
+Number = "Seed - 12"
+Text = "Gain 75% Seed Income"
+IsExponent = true
+Value = 1.75
+Cost = 1e+18
+UnlockBtn = ["Seed - 13", "Seed - 00"]
+
+[node name="HLine" type="Sprite2D" parent="Seed/Seed-12"]
+z_index = -1
+position = Vector2(274, 0)
+scale = Vector2(2, 2)
+texture = ExtResource("4_sltar")
+
+[node name="Seed-13" type="Sprite2D" parent="Seed"]
+position = Vector2(525, 595)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_8m4aq")
+script = ExtResource("3_v3wsh")
+ButtonType = "Seed"
+Name = "Bonus in the End :o"
+Number = "Seed - 13"
+Text = "Gain 25% Seed Income
+(Doubles in the Max Level)"
+Value = 1.25
+Cost = 250000.0
+Exponent = 1.125
+MaxLevel = 5
+UnlockBtn = ["Seed - 14", "Seed - 00"]
+BloomToggle = true
+BloomInterval = 5
+BloomValue = 2.0
+
+[node name="VLine" type="Sprite2D" parent="Seed/Seed-13"]
+z_index = -1
+position = Vector2(0, 146)
+scale = Vector2(2, 2)
+texture = ExtResource("5_bgwxu")
+
+[node name="Seed-14" type="Sprite2D" parent="Seed"]
+position = Vector2(250, 595)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_8m4aq")
+script = ExtResource("3_v3wsh")
+ButtonType = "Seed"
+Name = "End of Seed Route"
+Number = "Seed - 14"
+Text = "Decrease Seed Income
+Timer by 0.10 seconds"
+Cost = 750000.0
+TimerToggle = true
+TimerValue = 0.1
+
+[node name="HLine" type="Sprite2D" parent="Seed/Seed-14"]
+z_index = -1
+position = Vector2(274, 0)
+scale = Vector2(2, 2)
+texture = ExtResource("4_sltar")
+
+[node name="Root" type="Node2D" parent="."]
+
+[node name="Wood" type="Node2D" parent="."]
+
+[node name="Leaf" type="Node2D" parent="."]
