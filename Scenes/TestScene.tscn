@@ -1,0 +1,282 @@
+[gd_scene load_steps=7 format=3 uid="uid://dl6llfeowgtai"]
+
+[ext_resource type="Script" uid="uid://b1ifun6m6u6qb" path="res://Scripts/BaseTree/Process.gd" id="1_0f5h7"]
+[ext_resource type="Texture2D" uid="uid://c3u4n0bg2exjg" path="res://Sprites/Button.png" id="2_qsjrb"]
+[ext_resource type="Script" uid="uid://b84rdf54mc7rv" path="res://Scripts/BaseTree/Upgrade.gd" id="3_c264a"]
+[ext_resource type="Texture2D" uid="uid://k5nhwajk33am" path="res://Sprites/PrestigeButton.png" id="4_6xh1p"]
+[ext_resource type="Script" uid="uid://cl8k530na0xwh" path="res://Scripts/BaseTree/Prestige.gd" id="5_5rbs6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u44n3"]
+bg_color = Color(0, 0, 0, 0.25098)
+
+[node name="TestScene" type="Node2D"]
+script = ExtResource("1_0f5h7")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="InfoLabel" type="Label" parent="CanvasLayer"]
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 150.0
+offset_bottom = 245.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_u44n3")
+text = "Seed: %s
+Base: %s
+Boosted: %s
+Income: %s
+Timer: %.2f
+Boost: %.3f
+BoostCap: %s
+Multi: %.2f"
+horizontal_alignment = 1
+
+[node name="Back" type="Button" parent="CanvasLayer/InfoLabel"]
+layout_mode = 0
+offset_top = 204.0
+offset_right = 60.0
+offset_bottom = 235.0
+text = "<"
+flat = true
+
+[node name="Next" type="Button" parent="CanvasLayer/InfoLabel"]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 204.0
+offset_right = 140.0
+offset_bottom = 235.0
+text = ">"
+flat = true
+
+[node name="Buttons" type="Node2D" parent="."]
+
+[node name="S00" type="Sprite2D" parent="Buttons"]
+position = Vector2(300, 100)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_qsjrb")
+script = ExtResource("3_c264a")
+Name = "Start"
+Number = "Seed - 00"
+Source = "Seed"
+Target = "Seed"
+Text = "Gain +1 Seed per Second"
+Upgrade = 1.0
+
+[node name="S01" type="Sprite2D" parent="Buttons"]
+position = Vector2(575, 100)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_qsjrb")
+script = ExtResource("3_c264a")
+Name = "Multi"
+Number = "Seed - 01"
+Source = "Seed"
+Target = "Seed"
+Text = "Doubles Seed Base Income"
+IsExponent = true
+Upgrade = 2.0
+Cost = 2.0
+CostExponent = 1.5
+MaxLevel = 5
+
+[node name="S02" type="Sprite2D" parent="Buttons"]
+position = Vector2(843, 100)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_qsjrb")
+script = ExtResource("3_c264a")
+Name = "Timer Mechanic"
+Number = "Seed - 02"
+Source = "Seed"
+Target = "Seed"
+Text = "Decrease Seed Income
+Timer by 0.25 seconds"
+Cost = 50.0
+TimerToggle = true
+TimerValue = 0.25
+
+[node name="S03" type="Sprite2D" parent="Buttons"]
+position = Vector2(300, 250)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_qsjrb")
+script = ExtResource("3_c264a")
+Name = "Bloom Mechanic"
+Number = "Seed - 03"
+Source = "Seed"
+Target = "Seed"
+Text = "+25% Seed Base Income
+(+75% per 5 levels)"
+IsExponent = true
+Upgrade = 1.25
+Cost = 75.0
+CostExponent = 1.125
+MaxLevel = 10
+BloomToggle = true
+BloomInterval = 5
+BloomValue = 1.75
+UnlockToggle = true
+UnlockTargets = Array[String](["Seed - 04", "Seed - 06A"])
+UnlockValues = Array[int]([5, 10])
+
+[node name="S04" type="Sprite2D" parent="Buttons"]
+position = Vector2(575, 250)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_qsjrb")
+script = ExtResource("3_c264a")
+Name = "Boost Mechanic"
+Number = "Seed - 04"
+Source = "Seed"
+Target = "Seed"
+Text = "Boost Base Seed Income by 5%
+Caution: There is 2.5x Boost Cap"
+Cost = 1500.0
+BoostToggle = true
+BoostSource = "Seed"
+BoostTarget = "Seed"
+BoostValue = 0.05
+
+[node name="S05" type="Sprite2D" parent="Buttons"]
+position = Vector2(850, 250)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_qsjrb")
+script = ExtResource("3_c264a")
+Name = "Cost Reduce Mechanic"
+Number = "Seed - 05"
+Source = "Seed"
+Target = "Seed"
+Text = "Reduce Cost for button
+\"Seed - E01\" to 7.5K"
+Cost = 5000.0
+ReduceToggle = true
+ReduceTarget = "Seed - E01"
+ReduceValue = 7500.0
+
+[node name="S01E" type="Sprite2D" parent="Buttons"]
+position = Vector2(300, 400)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_qsjrb")
+script = ExtResource("3_c264a")
+Name = "Increase Boost Cap"
+Number = "Seed - E01"
+Source = "Seed"
+Target = "Seed"
+Text = "+0.5x Seed Boost Cap"
+Cost = 1e+15
+CapToggle = true
+CapValue = 0.5
+
+[node name="RootPrestige" type="Sprite2D" parent="Buttons"]
+position = Vector2(575, 400)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_6xh1p")
+script = ExtResource("5_5rbs6")
+Name = "Seed to Root"
+Source = "Seed"
+Target = "Root"
+Cost = 10000.0
+Text = "Your seed its growthing! 
+Sacrifice your seeds to get Roots"
+
+[node name="R00" type="Sprite2D" parent="Buttons"]
+position = Vector2(850, 400)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_qsjrb")
+script = ExtResource("3_c264a")
+Name = "Multi Root"
+Number = "Root - 00"
+Source = "Root"
+Target = "Seed"
+Text = "Doubles Seed Production"
+IsExponent = true
+IsMulti = true
+Upgrade = 2.0
+Cost = 1000.0
+
+[node name="WoodPrestige" type="Sprite2D" parent="Buttons"]
+position = Vector2(850, 550)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_6xh1p")
+script = ExtResource("5_5rbs6")
+Name = "Root to Wood"
+Source = "Root"
+Target = "Wood"
+Cost = 5.0
+Text = "Now with enough grip, it goes growth!
+Sacrifice all Roots to get Wood"
+
+[node name="S06A" type="Sprite2D" parent="Buttons"]
+position = Vector2(300, 550)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_qsjrb")
+script = ExtResource("3_c264a")
+Name = "Synergy Mechanic"
+Number = "Seed - 06A"
+Source = "Seed"
+Target = "Seed"
+Text = "(Purchase Both button for effect)"
+Cost = 500.0
+SynergyToggle = true
+SynergyTargets = ["Seed - 06A", "Seed - 06B"]
+SynergyReward = [{
+"IsExponent": true,
+"IsMulti": false,
+"Target": "Seed",
+"Type": "Multi",
+"Value": 2.0
+}, {
+"Target": "Seed",
+"Type": "Boost",
+"Value": 0.05
+}, {
+"Target": "Root - 00",
+"Type": "Reduce",
+"Value": 1.0
+}, {
+"Target": "Seed",
+"Type": "Timer",
+"Value": 0.25
+}, {
+"Target": "Seed",
+"Type": "BoostCap",
+"Value": 1.0
+}]
+SynergyRewardText = "Doubles Base Seed Income, +5% Seed Boost to Itself,
+Reduce Cost for Button \"Root - 00\" to 1 Root,
+Decrease Seed Income Timer by 0.25 seconds, +1x Seed Boost Cap"
+
+[node name="S06B" type="Sprite2D" parent="Buttons"]
+position = Vector2(575, 550)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_qsjrb")
+script = ExtResource("3_c264a")
+Name = "Synergy Mechanic"
+Number = "Seed - 06B"
+Source = "Seed"
+Target = "Seed"
+Text = "(Purchase Both button for effect)"
+Cost = 750.0
+SynergyToggle = true
+SynergyTargets = ["Seed - 06A", "Seed - 06B"]
+SynergyReward = [{
+"IsExponent": true,
+"IsMulti": false,
+"Target": "Seed",
+"Type": "Multi",
+"Value": 2.0
+}, {
+"Target": "Seed",
+"Type": "Boost",
+"Value": 0.05
+}, {
+"Target": "Root - 00",
+"Type": "Reduce",
+"Value": 1.0
+}, {
+"Target": "Seed",
+"Type": "Timer",
+"Value": 0.25
+}, {
+"Target": "Seed",
+"Type": "BoostCap",
+"Value": 1.0
+}]
+SynergyRewardText = "Doubles Base Seed Income, +5% Seed Boost to Itself,
+Reduce Cost for Button \"Root - 00\" to 1 Root,
+Decrease Seed Income Timer by 0.25 seconds, +1x Seed Boost Cap"
