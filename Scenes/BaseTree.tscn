@@ -1,0 +1,186 @@
+[gd_scene load_steps=6 format=3 uid="uid://b74ucw4g0k1sk"]
+
+[ext_resource type="Script" uid="uid://b1ifun6m6u6qb" path="res://Scripts/BaseTree/Process.gd" id="1_ooh4j"]
+[ext_resource type="Script" uid="uid://bqpvt0ntq6ay6" path="res://Scripts/BaseTree/Camera.gd" id="2_ypx6x"]
+[ext_resource type="Texture2D" uid="uid://downbaokjm7g" path="res://Sprites/UpgradeTree/Button.png" id="3_8m4aq"]
+[ext_resource type="Script" uid="uid://b84rdf54mc7rv" path="res://Scripts/BaseTree/Upgrade.gd" id="4_v3wsh"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ypx6x"]
+bg_color = Color(0, 0, 0, 0.25098)
+
+[node name="BaseTree" type="Node2D"]
+script = ExtResource("1_ooh4j")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="InfoLabel" type="Label" parent="CanvasLayer"]
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 160.0
+offset_bottom = 245.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_ypx6x")
+text = "Seed: 999.99K
+Base: 999.99K
+Boosted: 999.99K
+Income: 999.99K
+Timer: 999.99K
+Boost: 999.99K
+BoostCap: 999.99K
+Multi: 999.99K"
+horizontal_alignment = 1
+
+[node name="Back" type="Button" parent="CanvasLayer/InfoLabel"]
+layout_mode = 0
+offset_top = 204.0
+offset_right = 65.0
+offset_bottom = 235.0
+focus_mode = 0
+text = "<"
+flat = true
+
+[node name="Next" type="Button" parent="CanvasLayer/InfoLabel"]
+layout_mode = 0
+offset_left = 85.0
+offset_top = 204.0
+offset_right = 150.0
+offset_bottom = 235.0
+focus_mode = 0
+text = ">"
+flat = true
+
+[node name="CameraPlayer" type="CharacterBody2D" parent="."]
+script = ExtResource("2_ypx6x")
+
+[node name="Camera2D" type="Camera2D" parent="CameraPlayer"]
+position = Vector2(576, 324)
+
+[node name="SeedButtons" type="Node2D" parent="."]
+
+[node name="S00" type="Sprite2D" parent="SeedButtons"]
+position = Vector2(576, 324)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_8m4aq")
+script = ExtResource("4_v3wsh")
+Name = "Starting Point"
+Number = "Seed - 00"
+Source = "Seed"
+Target = "Seed"
+UnlockBtn = Array[String](["Seed - 01"])
+Text = "Time to start growing a tree!
++1 Seed Income per second"
+Upgrade = 1.0
+
+[node name="S01" type="Sprite2D" parent="SeedButtons"]
+position = Vector2(836, 324)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_8m4aq")
+script = ExtResource("4_v3wsh")
+Name = "First Upgrade"
+Number = "Seed - 01"
+Source = "Seed"
+Target = "Seed"
+UnlockBtn = Array[String](["Seed - 02", "Seed - 01.1"])
+Text = "Doubles Seed Income gain"
+IsExponent = true
+Upgrade = 2.0
+Cost = 2.0
+
+[node name="S02" type="Sprite2D" parent="SeedButtons"]
+position = Vector2(1096, 324)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_8m4aq")
+script = ExtResource("4_v3wsh")
+Name = "Multi-Level Upgrade"
+Number = "Seed - 02"
+Source = "Seed"
+Target = "Seed"
+UnlockBtn = Array[String](["Seed - 03"])
+Text = "+25% Seed Income gain per level"
+IsExponent = true
+Upgrade = 1.25
+Cost = 5.0
+CostExponent = 1.2
+MaxLevel = 5
+UnlockToggle = true
+UnlockTargets = Array[String](["Seed - 01.1"])
+UnlockValues = Array[int]([5])
+
+[node name="S01_1" type="Sprite2D" parent="SeedButtons"]
+position = Vector2(836, 192)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_8m4aq")
+script = ExtResource("4_v3wsh")
+Name = "Specific Amount"
+Number = "Seed - 01.1"
+Source = "Seed"
+Target = "Seed"
+UnlockBtn = Array[String](["Seed - 01.2"])
+Text = "+1.4 Seed Income gain"
+Upgrade = 1.4
+Cost = 15.0
+
+[node name="S01_2" type="Sprite2D" parent="SeedButtons"]
+position = Vector2(1096, 192)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_8m4aq")
+script = ExtResource("4_v3wsh")
+Name = "Timer Mechanic"
+Number = "Seed - 01.2"
+Source = "Seed"
+Target = "Seed"
+Text = "Decrease Seed Income
+Timer by 0.1 seconds"
+Cost = 20.0
+TimerToggle = true
+TimerValue = 0.1
+UnlockToggle = true
+UnlockTargets = Array[String](["Seed - 03"])
+UnlockValues = Array[int]([1])
+
+[node name="S03" type="Sprite2D" parent="SeedButtons"]
+position = Vector2(1356, 324)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_8m4aq")
+script = ExtResource("4_v3wsh")
+Name = "Some more... Why not?"
+Number = "Seed - 03"
+Source = "Seed"
+Target = "Seed"
+UnlockBtn = Array[String](["Seed - 04"])
+Text = "+50% Seed Income gain"
+IsExponent = true
+Upgrade = 1.5
+Cost = 30.0
+
+[node name="S04" type="Sprite2D" parent="SeedButtons"]
+position = Vector2(1616, 324)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_8m4aq")
+script = ExtResource("4_v3wsh")
+Name = "More new mechanics ahead"
+Number = "Seed - 04"
+Source = "Seed"
+Target = "Seed"
+UnlockBtn = Array[String](["Seed - 04.1", "Seed - 05"])
+Text = "Doubles Seed Income gain"
+IsExponent = true
+Upgrade = 2.0
+Cost = 50.0
+
+[node name="S04_1" type="Sprite2D" parent="SeedButtons"]
+position = Vector2(1616, 192)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_8m4aq")
+script = ExtResource("4_v3wsh")
+Name = "Boost Mechanic"
+Number = "Seed - 04.1"
+Source = "Seed"
+Target = "Seed"
+UnlockBtn = Array[String](["Seed - 04.2"])
+Text = "Boost Seed Income by 5% overtime
+Caution: There is 2.5x Boost Cap"
+Cost = 85.0
+BoostToggle = true
+BoostSource = "Seed"
+BoostTarget = "Seed"
+BoostValue = 0.05

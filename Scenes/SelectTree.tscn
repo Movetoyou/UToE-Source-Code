@@ -1,0 +1,229 @@
+[gd_scene load_steps=5 format=3 uid="uid://c0qmo53hb2kyp"]
+
+[ext_resource type="Script" uid="uid://biimeun787p5u" path="res://Scripts/SelectTree/SelectTree.gd" id="1_wgpow"]
+[ext_resource type="Texture2D" uid="uid://c335pwporifrx" path="res://Sprites/TreeSelect/Ground.png" id="2_h6dky"]
+[ext_resource type="Texture2D" uid="uid://e4civay87qqf" path="res://Sprites/TreeSelect/Fence.png" id="3_ajtg8"]
+[ext_resource type="Texture2D" uid="uid://i32ytvxt5s64" path="res://Sprites/TreeSelect/Sky.png" id="4_andpn"]
+
+[node name="SelectTree" type="Node2D"]
+script = ExtResource("1_wgpow")
+
+[node name="BaseTree" type="Button" parent="."]
+z_index = 1
+offset_left = 345.0
+offset_top = 73.0
+offset_right = 784.0
+offset_bottom = 624.0
+text = "To BaseTree"
+
+[node name="GroundSprites" type="Node" parent="."]
+
+[node name="Ground" type="Sprite2D" parent="GroundSprites"]
+position = Vector2(64, 648)
+texture = ExtResource("2_h6dky")
+
+[node name="Ground2" type="Sprite2D" parent="GroundSprites"]
+position = Vector2(64, 584)
+texture = ExtResource("2_h6dky")
+
+[node name="Ground3" type="Sprite2D" parent="GroundSprites"]
+position = Vector2(64, 520)
+texture = ExtResource("2_h6dky")
+
+[node name="Ground4" type="Sprite2D" parent="GroundSprites"]
+position = Vector2(192, 648)
+texture = ExtResource("2_h6dky")
+
+[node name="Ground5" type="Sprite2D" parent="GroundSprites"]
+position = Vector2(192, 584)
+texture = ExtResource("2_h6dky")
+
+[node name="Ground6" type="Sprite2D" parent="GroundSprites"]
+position = Vector2(192, 520)
+texture = ExtResource("2_h6dky")
+
+[node name="Ground7" type="Sprite2D" parent="GroundSprites"]
+position = Vector2(320, 648)
+texture = ExtResource("2_h6dky")
+
+[node name="Ground8" type="Sprite2D" parent="GroundSprites"]
+position = Vector2(320, 584)
+texture = ExtResource("2_h6dky")
+
+[node name="Ground9" type="Sprite2D" parent="GroundSprites"]
+position = Vector2(320, 520)
+texture = ExtResource("2_h6dky")
+
+[node name="Ground10" type="Sprite2D" parent="GroundSprites"]
+position = Vector2(448, 648)
+texture = ExtResource("2_h6dky")
+
+[node name="Ground11" type="Sprite2D" parent="GroundSprites"]
+position = Vector2(448, 584)
+texture = ExtResource("2_h6dky")
+
+[node name="Ground12" type="Sprite2D" parent="GroundSprites"]
+position = Vector2(448, 520)
+texture = ExtResource("2_h6dky")
+
+[node name="Ground13" type="Sprite2D" parent="GroundSprites"]
+position = Vector2(576, 648)
+texture = ExtResource("2_h6dky")
+
+[node name="Ground14" type="Sprite2D" parent="GroundSprites"]
+position = Vector2(576, 584)
+texture = ExtResource("2_h6dky")
+
+[node name="Ground15" type="Sprite2D" parent="GroundSprites"]
+position = Vector2(576, 520)
+texture = ExtResource("2_h6dky")
+
+[node name="Ground16" type="Sprite2D" parent="GroundSprites"]
+position = Vector2(704, 648)
+texture = ExtResource("2_h6dky")
+
+[node name="Ground17" type="Sprite2D" parent="GroundSprites"]
+position = Vector2(704, 584)
+texture = ExtResource("2_h6dky")
+
+[node name="Ground18" type="Sprite2D" parent="GroundSprites"]
+position = Vector2(704, 520)
+texture = ExtResource("2_h6dky")
+
+[node name="Ground19" type="Sprite2D" parent="GroundSprites"]
+position = Vector2(832, 648)
+texture = ExtResource("2_h6dky")
+
+[node name="Ground20" type="Sprite2D" parent="GroundSprites"]
+position = Vector2(832, 584)
+texture = ExtResource("2_h6dky")
+
+[node name="Ground21" type="Sprite2D" parent="GroundSprites"]
+position = Vector2(832, 520)
+texture = ExtResource("2_h6dky")
+
+[node name="Ground22" type="Sprite2D" parent="GroundSprites"]
+position = Vector2(960, 648)
+texture = ExtResource("2_h6dky")
+
+[node name="Ground23" type="Sprite2D" parent="GroundSprites"]
+position = Vector2(960, 584)
+texture = ExtResource("2_h6dky")
+
+[node name="Ground24" type="Sprite2D" parent="GroundSprites"]
+position = Vector2(960, 520)
+texture = ExtResource("2_h6dky")
+
+[node name="Ground25" type="Sprite2D" parent="GroundSprites"]
+position = Vector2(1088, 648)
+texture = ExtResource("2_h6dky")
+
+[node name="Ground26" type="Sprite2D" parent="GroundSprites"]
+position = Vector2(1088, 584)
+texture = ExtResource("2_h6dky")
+
+[node name="Ground27" type="Sprite2D" parent="GroundSprites"]
+position = Vector2(1088, 520)
+texture = ExtResource("2_h6dky")
+
+[node name="Fences" type="Node" parent="."]
+
+[node name="Fence" type="Sprite2D" parent="Fences"]
+position = Vector2(24, 360)
+texture = ExtResource("3_ajtg8")
+
+[node name="Fence2" type="Sprite2D" parent="Fences"]
+position = Vector2(72, 360)
+texture = ExtResource("3_ajtg8")
+
+[node name="Fence3" type="Sprite2D" parent="Fences"]
+position = Vector2(120, 360)
+texture = ExtResource("3_ajtg8")
+
+[node name="Fence4" type="Sprite2D" parent="Fences"]
+position = Vector2(168, 360)
+texture = ExtResource("3_ajtg8")
+
+[node name="Fence5" type="Sprite2D" parent="Fences"]
+position = Vector2(216, 360)
+texture = ExtResource("3_ajtg8")
+
+[node name="Fence6" type="Sprite2D" parent="Fences"]
+position = Vector2(264, 360)
+texture = ExtResource("3_ajtg8")
+
+[node name="Fence7" type="Sprite2D" parent="Fences"]
+position = Vector2(312, 360)
+texture = ExtResource("3_ajtg8")
+
+[node name="Fence8" type="Sprite2D" parent="Fences"]
+position = Vector2(360, 360)
+texture = ExtResource("3_ajtg8")
+
+[node name="Fence9" type="Sprite2D" parent="Fences"]
+position = Vector2(408, 360)
+texture = ExtResource("3_ajtg8")
+
+[node name="Fence10" type="Sprite2D" parent="Fences"]
+position = Vector2(456, 360)
+texture = ExtResource("3_ajtg8")
+
+[node name="Fence11" type="Sprite2D" parent="Fences"]
+position = Vector2(504, 360)
+texture = ExtResource("3_ajtg8")
+
+[node name="Fence12" type="Sprite2D" parent="Fences"]
+position = Vector2(552, 360)
+texture = ExtResource("3_ajtg8")
+
+[node name="Fence13" type="Sprite2D" parent="Fences"]
+position = Vector2(600, 360)
+texture = ExtResource("3_ajtg8")
+
+[node name="Fence14" type="Sprite2D" parent="Fences"]
+position = Vector2(648, 360)
+texture = ExtResource("3_ajtg8")
+
+[node name="Fence15" type="Sprite2D" parent="Fences"]
+position = Vector2(696, 360)
+texture = ExtResource("3_ajtg8")
+
+[node name="Fence16" type="Sprite2D" parent="Fences"]
+position = Vector2(744, 360)
+texture = ExtResource("3_ajtg8")
+
+[node name="Fence17" type="Sprite2D" parent="Fences"]
+position = Vector2(792, 360)
+texture = ExtResource("3_ajtg8")
+
+[node name="Fence18" type="Sprite2D" parent="Fences"]
+position = Vector2(840, 360)
+texture = ExtResource("3_ajtg8")
+
+[node name="Fence19" type="Sprite2D" parent="Fences"]
+position = Vector2(888, 360)
+texture = ExtResource("3_ajtg8")
+
+[node name="Fence20" type="Sprite2D" parent="Fences"]
+position = Vector2(936, 360)
+texture = ExtResource("3_ajtg8")
+
+[node name="Fence21" type="Sprite2D" parent="Fences"]
+position = Vector2(984, 360)
+texture = ExtResource("3_ajtg8")
+
+[node name="Fence22" type="Sprite2D" parent="Fences"]
+position = Vector2(1032, 360)
+texture = ExtResource("3_ajtg8")
+
+[node name="Fence23" type="Sprite2D" parent="Fences"]
+position = Vector2(1080, 360)
+texture = ExtResource("3_ajtg8")
+
+[node name="Fence24" type="Sprite2D" parent="Fences"]
+position = Vector2(1128, 360)
+texture = ExtResource("3_ajtg8")
+
+[node name="Sky" type="Sprite2D" parent="."]
+position = Vector2(576, 149)
+texture = ExtResource("4_andpn")
